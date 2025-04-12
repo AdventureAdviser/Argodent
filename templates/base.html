@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>АРГОДЕНТ - {% block title %}{% endblock %}</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="{{ url_for('index') }}">АРГОДЕНТ</a>
+  <div class="collapse navbar-collapse">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item"><a class="nav-link" href="{{ url_for('about') }}">Информация о клинике</a></li>
+      <li class="nav-item"><a class="nav-link" href="{{ url_for('services') }}">Услуги</a></li>
+      <li class="nav-item"><a class="nav-link" href="{{ url_for('specialists_page') }}">Специалисты</a></li>
+      <li class="nav-item"><a class="nav-link" href="{{ url_for('appointment') }}">Записаться на прием</a></li>
+      <li class="nav-item"><a class="nav-link" href="{{ url_for('login') }}">Личный кабинет</a></li>
+    </ul>
+    <span class="navbar-text">
+      Контакты: ул. Примерная, 123, тел: 123-456-7890, email: info@argodent.ru
+    </span>
+  </div>
+</nav>
+<div class="container mt-4">
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      {% for category, message in messages %}
+        <div class="alert alert-{{ 'danger' if category=='error' else category }}" role="alert">
+          {{ message }}
+        </div>
+      {% endfor %}
+    {% endif %}
+  {% endwith %}
+  {% block content %}{% endblock %}
+</div>
+</body>
+</html>

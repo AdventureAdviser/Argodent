@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}Перенос записи{% endblock %}
+{% block content %}
+<h2>Перенос записи</h2>
+<p>Старая дата и время: {{ appointment['appointment_datetime'] }}</p>
+<form method="POST">
+  <div class="form-group">
+    <label for="appointment_datetime">Новая дата и время</label>
+    <input type="datetime-local" class="form-control" id="appointment_datetime" name="appointment_datetime" required>
+  </div>
+  <button type="submit" class="btn btn-primary">Перенести запись</button>
+</form>
+<a href="{{ url_for('cabinet') }}" class="btn btn-secondary mt-3">Отмена</a>
+{% endblock %}

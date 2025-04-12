@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %}Услуги{% endblock %}
+{% block content %}
+<h2>Наши услуги</h2>
+<div class="row">
+  {% for service in services %}
+  <div class="col-md-4 mb-4">
+    <div class="card">
+<!--      <img src="{{ service.photo }}" class="card-img-top" alt="{{ service.name }}">-->
+      <div class="card-body">
+        <h5 class="card-title">{{ service.name }}</h5>
+        <p class="card-text">{{ service.description }}</p>
+        <p class="card-text"><strong>Стоимость:</strong> {{ service.cost }} руб.</p>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% endblock %}

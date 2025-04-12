@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% block title %}Личный кабинет{% endblock %}
+{% block content %}
+<h2>Личный кабинет</h2>
+
+<h3>Личные данные</h3>
+<form method="POST" action="{{ url_for('cabinet') }}">
+  <div class="form-group">
+    <label for="fullname">ФИО</label>
+    <input type="text" class="form-control" id="fullname" name="fullname" value="{{ user['fullname'] }}" required>
+  </div>
+  <div class="form-group">
+    <label for="email">Email</label>
+    <input type="email" class="form-control" id="email" name="email" value="{{ user['email'] }}" required>
+  </div>
+  <div class="form-group">
+    <label for="phone">Телефон</label>
+    <input type="text" class="form-control" id="phone" name="phone" value="{{ user['phone'] }}" required>
+  </div>
+  <button type="submit" class="btn btn-primary">Сохранить изменения</button>
+</form>
+
+<h3 class="mt-4">История записей</h3>
+{% if appointments %}
+  <table class="table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Специалист</th>
+        <th>Услуга</th>
+        <th>Дата и время</th>
+        <th>Действия</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for app in appointments %}
+      <tr>
+        <td>{{ app['id'] }}</td>
+        <td>{{ app['specialist_name'] }}</td>
+        <td>{{ app['service_name'] }}</td>
+        <td>{{ app['appointment_datetime'] }}</td>
+        <td>
+          <form action="{{ url_for('cancel_appointment', appointment_id=app['id']) }}" method="POST" style="display:inline;">
+            <button type="submit" class="btn btn-danger btn-sm">Отменить</button>
+          </form>
+          <a href="{{ url_for('reschedule_appointment', appointment_id=app['id']) }}" class="btn btn-warning btn-sm">Перенести</a>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% else %}
+  <p>Записей нет.</p>
+{% endif %}
+
+<a href="{{ url_for('logout') }}" class="btn btn-secondary mt-3">Выйти</a>
+{% endblock %}

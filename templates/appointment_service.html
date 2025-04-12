@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}Запись на прием - Выбор услуги{% endblock %}
+{% block content %}
+<h2>Шаг 2: Выбор услуги</h2>
+<form method="POST">
+  {% for service in services %}
+  <div class="form-check">
+    <input class="form-check-input" type="radio" name="service" id="service{{ service.id }}" value="{{ service.id }}" required>
+    <label class="form-check-label" for="service{{ service.id }}">
+      <strong>{{ service.name }}</strong><br>
+      <small>{{ service.description }} — Стоимость: {{ service.cost }} руб.</small>
+    </label>
+  </div>
+  {% endfor %}
+  <button type="submit" class="btn btn-primary mt-3">Далее</button>
+</form>
+<a href="{{ url_for('appointment_specialist') }}" class="btn btn-secondary mt-3">Назад</a>
+{% endblock %}

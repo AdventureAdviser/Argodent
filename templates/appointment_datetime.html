@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %}Запись на прием - Выбор даты и времени{% endblock %}
+{% block content %}
+<h2>Шаг 3: Выбор даты и времени</h2>
+<form method="POST">
+  <div class="form-group">
+    <label for="appointment_datetime">Дата и время приема</label>
+    <input type="datetime-local" class="form-control" id="appointment_datetime" name="appointment_datetime" required>
+  </div>
+  <button type="submit" class="btn btn-primary">Подтвердить запись</button>
+</form>
+<a href="{{ url_for('appointment_service') }}" class="btn btn-secondary mt-3">Назад</a>
+{% endblock %}

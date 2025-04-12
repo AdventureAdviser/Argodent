@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %}Специалисты{% endblock %}
+{% block content %}
+<h2>Наши специалисты</h2>
+<div class="row">
+  {% for specialist in specialists %}
+  <div class="col-md-4 mb-4">
+    <div class="card">
+      <img src="{{ url_for('static', filename=specialist.photo) }}" class="card-img-top" alt="{{ specialist.firstname }} {{ specialist.lastname }}">
+      <div class="card-body">
+        <h5 class="card-title">{{ specialist.firstname }} {{ specialist.lastname }}</h5>
+        <p class="card-text"><strong>Должность:</strong> {{ specialist.position }}</p>
+        <p class="card-text"><strong>Описание:</strong> {{ specialist.description }}</p>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% endblock %}

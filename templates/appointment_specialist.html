@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}Запись на прием - Выбор специалиста{% endblock %}
+{% block content %}
+<h2>Шаг 1: Выбор специалиста</h2>
+<form method="POST">
+  {% for specialist in specialists %}
+  <div class="form-check">
+    <input class="form-check-input" type="radio" name="specialist" id="specialist{{ specialist.id }}" value="{{ specialist.id }}" required>
+    <label class="form-check-label" for="specialist{{ specialist.id }}">
+      <strong>{{ specialist.firstname }} {{ specialist.lastname }}</strong> — {{ specialist.position }}<br>
+      <small>{{ specialist.description }}</small>
+    </label>
+  </div>
+  {% endfor %}
+  <button type="submit" class="btn btn-primary mt-3">Далее</button>
+</form>
+<a href="{{ url_for('index') }}" class="btn btn-secondary mt-3">Назад</a>
+{% endblock %}
